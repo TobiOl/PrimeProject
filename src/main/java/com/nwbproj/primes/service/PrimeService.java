@@ -1,4 +1,4 @@
-package com.nwbproj.primes.service.impl;
+package com.nwbproj.primes.service;
 
 import com.nwbproj.primes.model.PrimesResponse;
 import org.springframework.http.ResponseEntity;

@@ -1,7 +1,7 @@
 package com.nwbproj.primes.controller;
 
 import com.nwbproj.primes.model.PrimesResponse;
-import com.nwbproj.primes.service.impl.PrimeService;
+import com.nwbproj.primes.service.PrimeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,7 +32,7 @@ public class PrimeController {
     @GetMapping(path = "/getPrime/{primeNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PrimesResponse> getPrimeList(
             @PathVariable(name = "primeNumber") Integer primeNumber,
-            @RequestParam String algorithm
+            @RequestParam(required = false, defaultValue = "") String algorithm
             ) throws Exception {
         return primeService.calculatePrimeList(primeNumber, algorithm);
     }
