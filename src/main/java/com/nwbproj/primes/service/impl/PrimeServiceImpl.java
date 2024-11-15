@@ -1,5 +1,6 @@
 package com.nwbproj.primes.service.impl;
 
+import com.nwbproj.primes.enums.Algorithms;
 import com.nwbproj.primes.exceptions.InvalidAlgorithimException;
 import com.nwbproj.primes.exceptions.InvalidPrimeInputException;
 import com.nwbproj.primes.model.PrimesResponse;
@@ -8,6 +9,7 @@ import com.nwbproj.primes.service.PrimeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -23,21 +25,22 @@ public class PrimeServiceImpl implements PrimeService {
 
 
     @Override
-    public ResponseEntity<PrimesResponse> calculatePrimeList(Integer number, String algorithm) throws Exception {
+    @Cacheable("primeCache")
+    public ResponseEntity<PrimesResponse> calculatePrimeList(Integer number, Algorithms algorithm) throws Exception {
         PrimesResponse response = new PrimesResponse();
 
         if (number<0){
-            // TODO fix custom exception
             throw new InvalidPrimeInputException("Values below 1 are invalid", HttpStatus.BAD_REQUEST.value());
         }
         if (algorithm==null){
-            throw new IllegalArgumentException("Algorithm cannot be null");
+            throw new InvalidAlgorithimException("Algorithm value cannot be null", HttpStatus.BAD_REQUEST.value());
         }
 
         switch (algorithm){
-            case "" -> response.setNumbers(algorithimsService.defaultAlgorithm(number));
-            case "soe" -> response.setNumbers(algorithimsService.sieveOfEratosthenes(number));
-            default -> throw new InvalidAlgorithimException("Must have a valid Algorithim input", HttpStatus.BAD_REQUEST.value());
+            //TODO consider some kind of concurrent algorithm for sieve
+            case DEFAULT -> response.setNumbers(algorithimsService.defaultAlgorithm(number));
+            case SIEVE_OF_ERATHOSTENES -> response.setNumbers(algorithimsService.sieveOfEratosthenes(number));
+            default -> throw new InvalidAlgorithimException("Algorithm entered not found", HttpStatus.NOT_FOUND.value());
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);

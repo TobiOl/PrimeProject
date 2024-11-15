@@ -28,12 +28,11 @@ public class AlgorithimsServiceImpl implements AlgorithimsService {
 
     @Override
     public List<Integer> sieveOfEratosthenes(Integer n) {
-        int srt = (int) Math.sqrt(n.doubleValue());
         ArrayList<Integer> result = new ArrayList<>();
 
-        //Create array of values up to n+2 and make them all true then set 0 and 1 to be not prime.
+        //Create array of values up to n+1 and make them all true then set 0 and 1 to be not prime.
         //if a value is false it is not a prime
-        boolean[] prime = new boolean[n + 2];
+        boolean[] prime = new boolean[n+1];
         Arrays.fill(prime, true);
         prime[0] = false;
         prime[1] = false;
@@ -49,7 +48,7 @@ public class AlgorithimsServiceImpl implements AlgorithimsService {
             }
         }
 
-        for (int p = srt; p <= n; p++) {
+        for (int p = 2; p <= n; p++) {
             if (prime[p]) {
                 result.add(p);
             }

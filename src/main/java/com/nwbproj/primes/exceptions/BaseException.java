@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 
 
 @Getter
-public class BaseException extends Exception{
+public class BaseException extends RuntimeException{
 
     private Integer httpStatus;
 
