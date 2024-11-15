@@ -41,15 +41,14 @@ public class AlgorithimsServiceImpl implements AlgorithimsService {
         for (int p = 2; p * p <= n; p++) {
             // If prime[p] is not changed, then it is a prime
             if (prime[p]) {
-                // Update all multiples of p greater than or equal to the square of it numbers which
-                // are multiple of p and are less than p^2 are already been marked.
+                //Changes all multiples of p that are greater than or equal to the square of p
+                //numbers that are multiples of p and are less that p squared have already been marked
                 for (int i = p * p; i <= n; i += p) {
                     prime[i] = false;
                 }
             }
         }
 
-        // Print all prime numbers
         for (int p = srt; p <= n; p++) {
             if (prime[p]) {
                 result.add(p);

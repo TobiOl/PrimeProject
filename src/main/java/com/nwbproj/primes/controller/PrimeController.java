@@ -29,13 +29,14 @@ public class PrimeController {
                     @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
             }
     )
-    @GetMapping(path = "/getPrime/{primeNumber}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(path = "/getPrime/{primeNumber}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<PrimesResponse> getPrimeList(
             @PathVariable(name = "primeNumber") Integer primeNumber,
             @RequestParam(required = false, defaultValue = "") String algorithm
             ) throws Exception {
         return primeService.calculatePrimeList(primeNumber, algorithm);
     }
+
 
 
 
