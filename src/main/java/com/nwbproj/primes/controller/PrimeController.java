@@ -27,7 +27,8 @@ public class PrimeController {
             responses = {
                     @ApiResponse(responseCode = "200", description = "Primes successfully calculated and displayed",
                     content = @Content(schema = @Schema(implementation = PrimesResponse.class))),
-                    @ApiResponse(responseCode = "400", description = "Bad request", content = @Content)
+                    @ApiResponse(responseCode = "400", description = "Bad request", content = @Content),
+                    @ApiResponse(responseCode = "500", description = "Internal service error", content = @Content)
             }
     )
     @GetMapping(path = "/getPrime/{primeNumber}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})

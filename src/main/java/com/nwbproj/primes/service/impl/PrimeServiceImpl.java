@@ -30,7 +30,7 @@ public class PrimeServiceImpl implements PrimeService {
         PrimesResponse response = new PrimesResponse();
 
         if (number<0){
-            throw new InvalidPrimeInputException("Values below 1 are invalid", HttpStatus.BAD_REQUEST.value());
+            throw new InvalidPrimeInputException("Values below 0 are invalid", HttpStatus.BAD_REQUEST.value());
         }
         if (algorithm==null){
             throw new InvalidAlgorithimException("Algorithm value cannot be null", HttpStatus.BAD_REQUEST.value());
@@ -40,7 +40,6 @@ public class PrimeServiceImpl implements PrimeService {
             //TODO consider some kind of concurrent algorithm for sieve
             case DEFAULT -> response.setNumbers(algorithimsService.defaultAlgorithm(number));
             case SIEVE_OF_ERATHOSTENES -> response.setNumbers(algorithimsService.sieveOfEratosthenes(number));
-            default -> throw new InvalidAlgorithimException("Algorithm entered not found", HttpStatus.NOT_FOUND.value());
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);

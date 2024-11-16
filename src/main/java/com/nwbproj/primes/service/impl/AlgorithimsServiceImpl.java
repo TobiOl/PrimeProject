@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 @Slf4j
@@ -15,7 +14,7 @@ import java.util.List;
 public class AlgorithimsServiceImpl implements AlgorithimsService {
     @Override
 
-    public List<Integer> defaultAlgorithm(Integer n) {
+    public ArrayList<Integer> defaultAlgorithm(Integer n) {
         ArrayList<Integer> result = new ArrayList<>();
 
         for (int i = 1; i<= n ; i++) {
@@ -27,15 +26,13 @@ public class AlgorithimsServiceImpl implements AlgorithimsService {
     }
 
     @Override
-    public List<Integer> sieveOfEratosthenes(Integer n) {
+    public ArrayList<Integer> sieveOfEratosthenes(Integer n) {
         ArrayList<Integer> result = new ArrayList<>();
 
         //Create array of values up to n+1 and make them all true then set 0 and 1 to be not prime.
         //if a value is false it is not a prime
         boolean[] prime = new boolean[n+1];
         Arrays.fill(prime, true);
-        prime[0] = false;
-        prime[1] = false;
 
         for (int p = 2; p * p <= n; p++) {
             // If prime[p] is not changed, then it is a prime

@@ -1,10 +1,10 @@
 package com.nwbproj.primes.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public interface AlgorithimsService {
 
-    public List<Integer> defaultAlgorithm(Integer n);
+    public ArrayList<Integer> defaultAlgorithm(Integer n);
 
-    public List<Integer> sieveOfEratosthenes(Integer n);
+    public ArrayList<Integer> sieveOfEratosthenes(Integer n);
 }
