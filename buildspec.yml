@@ -8,7 +8,7 @@ phases:
             - REPOSITORY_URI=148761681243.dkr.ecr.eu-west-2.amazonaws.com/primeproject
             - aws ecr get-login-password --region eu-west-2 | docker login --username AWS --password-stdin $REPOSITORY_URI
             - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-            - IMAGE_TAG=build-$(echo$CODEBUILD_BUILD_ID | awk -F":" '{print}')
+            - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
     build:
         commands:
             - echo Build started on 'date'
