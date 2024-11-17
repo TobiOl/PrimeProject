@@ -1,7 +1,7 @@
 package com.nwbproj.primes.service;
 
 
-import com.nwbproj.primes.service.impl.AlgorithimsServiceImpl;
+import com.nwbproj.primes.algorithms.impl.AlgorithmsImpl;
 import com.nwbproj.primes.utils.TestUtils;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -15,15 +15,13 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.when;
 
 
 @ExtendWith(MockitoExtension.class)
 public class AlgorithmServiceTest {
 
     @InjectMocks
-    private AlgorithimsServiceImpl algorithimsService;
+    private AlgorithmsImpl algorithimsService;
 
 
     @Test

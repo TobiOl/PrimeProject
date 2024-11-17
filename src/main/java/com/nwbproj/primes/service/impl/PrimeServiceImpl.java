@@ -1,10 +1,10 @@
 package com.nwbproj.primes.service.impl;
 
-import com.nwbproj.primes.enums.Algorithms;
+import com.nwbproj.primes.enums.AlgorithmsEnum;
 import com.nwbproj.primes.exceptions.InvalidAlgorithimException;
 import com.nwbproj.primes.exceptions.InvalidPrimeInputException;
 import com.nwbproj.primes.model.PrimesResponse;
-import com.nwbproj.primes.service.AlgorithimsService;
+import com.nwbproj.primes.algorithms.Algorithms;
 import com.nwbproj.primes.service.PrimeService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -15,19 +15,22 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 
+
 @Service
 @Slf4j
 @AllArgsConstructor
 public class PrimeServiceImpl implements PrimeService {
 
+
     @Autowired
-    private AlgorithimsServiceImpl algorithimsService;
+    private Algorithms algorithms;
 
 
     @Override
     @Cacheable("primeCache")
-    public ResponseEntity<PrimesResponse> calculatePrimeList(Integer number, Algorithms algorithm) throws Exception {
+    public ResponseEntity<PrimesResponse> calculatePrimeList(Integer number, AlgorithmsEnum algorithm) throws Exception {
         PrimesResponse response = new PrimesResponse();
+
 
         if (number<0){
             throw new InvalidPrimeInputException("Values below 0 are invalid", HttpStatus.BAD_REQUEST.value());
@@ -38,8 +41,8 @@ public class PrimeServiceImpl implements PrimeService {
 
         switch (algorithm){
             //TODO consider some kind of concurrent algorithm for sieve
-            case DEFAULT -> response.setNumbers(algorithimsService.defaultAlgorithm(number));
-            case SIEVE_OF_ERATHOSTENES -> response.setNumbers(algorithimsService.sieveOfEratosthenes(number));
+            case DEFAULT -> response.setNumbers(algorithms.defaultAlgorithm(number));
+            case SIEVE_OF_ERATHOSTENES -> response.setNumbers(algorithms.sieveOfEratosthenes(number));
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);

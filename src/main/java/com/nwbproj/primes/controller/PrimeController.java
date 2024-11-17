@@ -1,6 +1,6 @@
 package com.nwbproj.primes.controller;
 
-import com.nwbproj.primes.enums.Algorithms;
+import com.nwbproj.primes.enums.AlgorithmsEnum;
 import com.nwbproj.primes.model.PrimesResponse;
 import com.nwbproj.primes.service.PrimeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -34,7 +34,7 @@ public class PrimeController {
     @GetMapping(path = "/getPrime/{primeNumber}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<PrimesResponse> getPrimeList(
             @PathVariable(name = "primeNumber") Integer primeNumber,
-            @RequestParam(required = false, defaultValue = "") Algorithms algorithm
+            @RequestParam(required = false, defaultValue = "") AlgorithmsEnum algorithm
             ) throws Exception {
         return primeService.calculatePrimeList(primeNumber, algorithm);
     }

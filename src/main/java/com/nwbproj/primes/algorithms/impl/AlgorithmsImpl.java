@@ -1,20 +1,20 @@
-package com.nwbproj.primes.service.impl;
+package com.nwbproj.primes.algorithms.impl;
 
-import com.nwbproj.primes.service.AlgorithimsService;
+import com.nwbproj.primes.algorithms.Algorithms;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-@Service
+@Component
 @Slf4j
 @AllArgsConstructor
-public class AlgorithimsServiceImpl implements AlgorithimsService {
-    @Override
+public class AlgorithmsImpl implements Algorithms {
 
     public ArrayList<Integer> defaultAlgorithm(Integer n) {
+        //Brute force algorithm
         ArrayList<Integer> result = new ArrayList<>();
 
         for (int i = 1; i<= n ; i++) {
@@ -25,7 +25,7 @@ public class AlgorithimsServiceImpl implements AlgorithimsService {
         return result;
     }
 
-    @Override
+
     public ArrayList<Integer> sieveOfEratosthenes(Integer n) {
         ArrayList<Integer> result = new ArrayList<>();
 

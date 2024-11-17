@@ -1,8 +1,8 @@
 package com.nwbproj.primes.controller;
 
-import com.nwbproj.primes.enums.Algorithms;
+import com.nwbproj.primes.enums.AlgorithmsEnum;
 import com.nwbproj.primes.model.PrimesResponse;
-import com.nwbproj.primes.service.impl.AlgorithimsServiceImpl;
+import com.nwbproj.primes.algorithms.impl.AlgorithmsImpl;
 import com.nwbproj.primes.service.impl.PrimeServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -37,7 +37,7 @@ public class PrimeControllerTest {
     private PrimeServiceImpl primeService;
 
     @Mock
-    private AlgorithimsServiceImpl algorithimsService;
+    private AlgorithmsImpl algorithimsService;
 
     @InjectMocks
     private  PrimeController primeController;
@@ -46,7 +46,7 @@ public class PrimeControllerTest {
 
     private final static String primesPath = "http://localhost:8080/getPrime/";
 
-    private final static Algorithms algorithm = Algorithms.DEFAULT;
+    private final static AlgorithmsEnum algorithm = AlgorithmsEnum.DEFAULT;
 
     @BeforeEach
     public void setup(){
@@ -61,30 +61,30 @@ public class PrimeControllerTest {
     @Test
     @DisplayName("Retrieves list of prime numbers(JSON)")
     public void GivenValidParameters_ShouldReturnOkJSON() throws Exception{
-        when(primeService.calculatePrimeList(100, Algorithms.DEFAULT))
+        when(primeService.calculatePrimeList(100, AlgorithmsEnum.DEFAULT))
                 .thenReturn(new ResponseEntity<PrimesResponse>(HttpStatus.OK));
 
         mockMvc.perform(get(StringUtils.join(primesPath, primeNumber))
-                        .queryParam("algorithm", String.valueOf(Algorithms.DEFAULT))
+                        .queryParam("algorithm", String.valueOf(AlgorithmsEnum.DEFAULT))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk());
 
-        verify(primeService, times(1)).calculatePrimeList(primeNumber, Algorithms.DEFAULT);
+        verify(primeService, times(1)).calculatePrimeList(primeNumber, AlgorithmsEnum.DEFAULT);
 
     }
 
     @Test
     @DisplayName("Retrieves list of prime numbers(XML)")
     public void GivenValidParameters_ShouldReturnOkXML() throws Exception{
-        when(primeService.calculatePrimeList(100, Algorithms.DEFAULT))
+        when(primeService.calculatePrimeList(100, AlgorithmsEnum.DEFAULT))
                 .thenReturn(new ResponseEntity<PrimesResponse>(HttpStatus.OK));
 
         mockMvc.perform(get(StringUtils.join(primesPath, primeNumber))
-                        .queryParam("algorithm", String.valueOf(Algorithms.DEFAULT))
+                        .queryParam("algorithm", String.valueOf(AlgorithmsEnum.DEFAULT))
                         .contentType(MediaType.APPLICATION_XML))
                 .andExpect(status().isOk());
 
-        verify(primeService, times(1)).calculatePrimeList(primeNumber, Algorithms.DEFAULT);
+        verify(primeService, times(1)).calculatePrimeList(primeNumber, AlgorithmsEnum.DEFAULT);
 
     }
 
@@ -93,7 +93,7 @@ public class PrimeControllerTest {
     public void GivenMissingPrimeNumberInput_ShouldReturnNotFound() throws Exception{
 
         mockMvc.perform(get(StringUtils.join(primesPath))
-                        .queryParam("algorithm", String.valueOf(Algorithms.DEFAULT))
+                        .queryParam("algorithm", String.valueOf(AlgorithmsEnum.DEFAULT))
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
 

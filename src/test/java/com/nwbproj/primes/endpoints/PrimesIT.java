@@ -1,15 +1,13 @@
 package com.nwbproj.primes.endpoints;
 
 
-import com.nwbproj.primes.enums.Algorithms;
+import com.nwbproj.primes.enums.AlgorithmsEnum;
 import io.restassured.RestAssured;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.entity.ContentType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ public class PrimesIT {
     public void GivenPrimeInput100AndDefaultAlgorithm_ShouldReturnResponse(){
         given()
                 .contentType("application/json")
-                .param("algorithm", Algorithms.DEFAULT)
+                .param("algorithm", AlgorithmsEnum.DEFAULT)
                 .get("100")
                 .then()
                 .assertThat()
@@ -49,7 +47,7 @@ public class PrimesIT {
     public void GivenPrimeInput100AndSoEAlgorithm_ShouldReturnResponse(){
         given()
                 .contentType("application/json")
-                .param("algorithm", Algorithms.SIEVE_OF_ERATHOSTENES)
+                .param("algorithm", AlgorithmsEnum.SIEVE_OF_ERATHOSTENES)
                 .get("100")
                 .then()
                 .assertThat()
@@ -62,7 +60,7 @@ public class PrimesIT {
     public void GivenPrimeInput100AndDefaultAlgorithm_ShouldReturnResponseXML(){
         given()
                 .contentType("application/xml")
-                .param("algorithm", Algorithms.DEFAULT)
+                .param("algorithm", AlgorithmsEnum.DEFAULT)
                 .get("100")
                 .then()
                 .assertThat()
@@ -87,7 +85,7 @@ public class PrimesIT {
     public void GivenValueBelow1_ShouldReturn400(){
         given()
                 .contentType("application/json")
-                .param("algorithm", Algorithms.DEFAULT)
+                .param("algorithm", AlgorithmsEnum.DEFAULT)
                 .get("-200")
                 .then()
                 .assertThat()

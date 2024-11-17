@@ -1,8 +1,8 @@
-package com.nwbproj.primes.service;
+package com.nwbproj.primes.algorithms;
 
 import java.util.ArrayList;
 
-public interface AlgorithimsService {
+public interface Algorithms {
 
     public ArrayList<Integer> defaultAlgorithm(Integer n);
 

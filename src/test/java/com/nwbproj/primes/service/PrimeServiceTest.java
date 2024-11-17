@@ -1,11 +1,11 @@
 package com.nwbproj.primes.service;
 
 
-import com.nwbproj.primes.enums.Algorithms;
+import com.nwbproj.primes.algorithms.Algorithms;
+import com.nwbproj.primes.enums.AlgorithmsEnum;
 import com.nwbproj.primes.exceptions.InvalidAlgorithimException;
 import com.nwbproj.primes.exceptions.InvalidPrimeInputException;
 import com.nwbproj.primes.model.PrimesResponse;
-import com.nwbproj.primes.service.impl.AlgorithimsServiceImpl;
 import com.nwbproj.primes.service.impl.PrimeServiceImpl;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -30,7 +30,7 @@ public class PrimeServiceTest {
     //The Prime service class is not meant to check if the output is correct or not, its just to do basic error checking and pass input to correct algorithm
 
     @Mock
-    private AlgorithimsServiceImpl algorithimsService;
+    private Algorithms algorithimsService;
 
     @InjectMocks
     private PrimeServiceImpl primeService;
@@ -38,9 +38,10 @@ public class PrimeServiceTest {
     @Test
     @DisplayName("Should return a Response Entity list of values from Algorithm service (Default algorithm")
     public void GivenValidInput_ShouldReturnResponseEntityDefault() throws Exception {
+
         when(algorithimsService.defaultAlgorithm(any())).thenReturn(new ArrayList<Integer>());
 
-        ResponseEntity<PrimesResponse> response = primeService.calculatePrimeList(100, Algorithms.DEFAULT);
+        ResponseEntity<PrimesResponse> response = primeService.calculatePrimeList(100, AlgorithmsEnum.DEFAULT);
 
         verify(algorithimsService, times(1)).defaultAlgorithm(100);
         assertEquals(ArrayList.class, Objects.requireNonNull(response.getBody()).getNumbers().getClass());
@@ -52,7 +53,7 @@ public class PrimeServiceTest {
     public void GivenValidInput_ShouldReturnResponseEntitySOE() throws Exception {
         when(algorithimsService.sieveOfEratosthenes(any())).thenReturn(new ArrayList<Integer>());
 
-        ResponseEntity<PrimesResponse> response = primeService.calculatePrimeList(100, Algorithms.SIEVE_OF_ERATHOSTENES);
+        ResponseEntity<PrimesResponse> response = primeService.calculatePrimeList(100, AlgorithmsEnum.SIEVE_OF_ERATHOSTENES);
 
         verify(algorithimsService, times(1)).sieveOfEratosthenes(100);
         assertEquals(ArrayList.class, Objects.requireNonNull(response.getBody()).getNumbers().getClass());
@@ -76,7 +77,7 @@ public class PrimeServiceTest {
     public void GivenInvalidNumberInput_ShouldReturnResponseEntity() throws Exception {
 
         InvalidPrimeInputException exception = assertThrows(InvalidPrimeInputException.class, () -> {
-            primeService.calculatePrimeList(-20, Algorithms.DEFAULT);
+            primeService.calculatePrimeList(-20, AlgorithmsEnum.DEFAULT);
         });
 
         assertEquals("Values below 0 are invalid", exception.getLocalizedMessage());

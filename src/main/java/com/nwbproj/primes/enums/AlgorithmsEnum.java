@@ -1,6 +1,6 @@
 package com.nwbproj.primes.enums;
 
-public enum Algorithms {
+public enum AlgorithmsEnum {
     DEFAULT,
     SIEVE_OF_ERATHOSTENES
 }
