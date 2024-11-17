@@ -13,7 +13,7 @@ import java.time.Instant;
 @Builder
 public class ApiError {
     private String title;
-    private Integer status;
+    private Integer httpStatus;
     private String detail;
     @Builder.Default
     private Instant timestamp = Instant.now();

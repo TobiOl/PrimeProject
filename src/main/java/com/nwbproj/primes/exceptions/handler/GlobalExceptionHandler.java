@@ -23,7 +23,6 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.BiFunction;
-import java.util.function.Function;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
@@ -45,7 +44,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ApiError error = ApiError.builder().
                 detail(exception.getLocalizedMessage())
                 .title("Invalid Algorithm value entered")
-                .status(exception.getHttpStatus())
+                .httpStatus(exception.getHttpStatus())
                 .build();
 
         logException(InvalidAlgorithimException.class.getSimpleName(), error);
@@ -60,7 +59,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ApiError error = ApiError.builder().
                 detail(exception.getLocalizedMessage())
                 .title("Invalid value for prime entered")
-                .status(exception.getHttpStatus())
+                .httpStatus(exception.getHttpStatus())
                 .build();
 
         logException(InvalidAlgorithimException.class.getSimpleName(), error);
@@ -76,7 +75,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ApiError error = ApiError.builder().
                 detail(ex.getLocalizedMessage())
                 .title("HTTP Client Error Exception")
-                .status(ex.getStatusCode().value())
+                .httpStatus(ex.getStatusCode().value())
                 .build();
 
         logException(HttpClientErrorException.class.getSimpleName(), error);
@@ -91,7 +90,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ApiError error = ApiError.builder().
                 detail(ex.getLocalizedMessage())
                 .title("Exception Thrown")
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
+                .httpStatus(HttpStatus.INTERNAL_SERVER_ERROR.value())
                 .build();
 
         logException(Exception.class.getSimpleName(), error);
@@ -108,7 +107,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         ApiError error = ApiError.builder()
                 .detail(ex.getLocalizedMessage())
                 .title("Method argument mismatch")
-                .status(HttpStatus.BAD_REQUEST.value())
+                .httpStatus(HttpStatus.BAD_REQUEST.value())
                 .build();
 
         logException(MethodArgumentTypeMismatchException.class.getSimpleName(), error);
