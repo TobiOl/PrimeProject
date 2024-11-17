@@ -12,7 +12,7 @@ import java.time.Instant;
 @ToString
 @Builder
 public class ApiError {
-    private String title;
+    private String Ttitle;
     private Integer httpStatus;
     private String detail;
     @Builder.Default
