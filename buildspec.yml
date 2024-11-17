@@ -21,6 +21,7 @@ phases:
             - docker push $REPOSITORY_URI:latest
             - docker push $REPOSITORY_URI:$IMAGE_TAG
             - echo Writing image definitions file...
+            - mv target/*.jar primes-0.0.1-SNAPSHOT.jar
             - printf '[{"name":"course-service","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
             - echo Writing image definitions file...
             - DOCKER_CONTAINER_NAME=primeproject
@@ -30,5 +31,5 @@ phases:
             - cat imagedefinitions.json
 artifacts:
     files:
-        - target/primes-0.0.1-SNAPSHOT.jar
+        - primes-0.0.1-SNAPSHOT.jar
         - imagedefinitions.json
