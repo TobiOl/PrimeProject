@@ -34,7 +34,7 @@ public class PrimeController {
     @GetMapping(path = "/getPrime/{primeNumber}", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
     public ResponseEntity<PrimesResponse> getPrimeList(
             @PathVariable(name = "primeNumber") Integer primeNumber,
-            @RequestParam(required = false, defaultValue = "") AlgorithmsEnum algorithm
+            @RequestParam(required = false, defaultValue = "DEFAULT") AlgorithmsEnum algorithm
             ) throws Exception {
         return primeService.calculatePrimeList(primeNumber, algorithm);
     }

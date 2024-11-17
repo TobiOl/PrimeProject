@@ -37,7 +37,7 @@ public class PrimesIT {
                 .get("100")
                 .then()
                 .assertThat()
-                .body("numbers", instanceOf(ArrayList.class))
+                .body("primeNumbers", instanceOf(ArrayList.class))
                 .statusCode(HttpStatus.OK.value());
     }
 
@@ -51,7 +51,7 @@ public class PrimesIT {
                 .get("100")
                 .then()
                 .assertThat()
-                .body("numbers", instanceOf(ArrayList.class))
+                .body("primeNumbers", instanceOf(ArrayList.class))
                 .statusCode(HttpStatus.OK.value());
     }
 
@@ -64,19 +64,19 @@ public class PrimesIT {
                 .get("100")
                 .then()
                 .assertThat()
-                .body("numbers", instanceOf(ArrayList.class))
+                .body("primeNumbers", instanceOf(ArrayList.class))
                 .statusCode(HttpStatus.OK.value());
     }
 
     @Test
-    @DisplayName("Returns 400 if no algorithm is given")
+    @DisplayName("Returns 400 if invalid algorithm is given")
     public void GivenNoAlgorithm_ShouldReturn400(){
         given()
                 .contentType("application/json")
+                .param("algorithm", "null")
                 .get("100")
                 .then()
                 .assertThat()
-                .body("detail", equalTo("Algorithm value cannot be null"))
                 .statusCode(HttpStatus.BAD_REQUEST.value());
     }
 

@@ -40,9 +40,8 @@ public class PrimeServiceImpl implements PrimeService {
         }
 
         switch (algorithm){
-            //TODO consider some kind of concurrent algorithm for sieve
-            case DEFAULT -> response.setNumbers(algorithms.defaultAlgorithm(number));
-            case SIEVE_OF_ERATHOSTENES -> response.setNumbers(algorithms.sieveOfEratosthenes(number));
+            case DEFAULT -> response.setPrimeNumbers(algorithms.defaultAlgorithm(number));
+            case SIEVE_OF_ERATHOSTENES -> response.setPrimeNumbers(algorithms.sieveOfEratosthenes(number));
         }
 
         return new ResponseEntity<>(response, HttpStatus.OK);

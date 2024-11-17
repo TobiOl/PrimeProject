@@ -13,5 +13,5 @@ import java.util.ArrayList;
 @AllArgsConstructor
 @XmlRootElement
 public class PrimesResponse {
-    private ArrayList<Integer> numbers;
+    private ArrayList<Integer> primeNumbers;
 }

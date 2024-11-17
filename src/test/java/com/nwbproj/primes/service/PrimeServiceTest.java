@@ -44,7 +44,7 @@ public class PrimeServiceTest {
         ResponseEntity<PrimesResponse> response = primeService.calculatePrimeList(100, AlgorithmsEnum.DEFAULT);
 
         verify(algorithimsService, times(1)).defaultAlgorithm(100);
-        assertEquals(ArrayList.class, Objects.requireNonNull(response.getBody()).getNumbers().getClass());
+        assertEquals(ArrayList.class, Objects.requireNonNull(response.getBody()).getPrimeNumbers().getClass());
 
     }
 
@@ -56,7 +56,7 @@ public class PrimeServiceTest {
         ResponseEntity<PrimesResponse> response = primeService.calculatePrimeList(100, AlgorithmsEnum.SIEVE_OF_ERATHOSTENES);
 
         verify(algorithimsService, times(1)).sieveOfEratosthenes(100);
-        assertEquals(ArrayList.class, Objects.requireNonNull(response.getBody()).getNumbers().getClass());
+        assertEquals(ArrayList.class, Objects.requireNonNull(response.getBody()).getPrimeNumbers().getClass());
 
     }
 
