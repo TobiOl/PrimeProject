@@ -1,0 +1,13 @@
+version: 0.2
+phases:
+    build:
+        commands:
+            - echo Packaging JAR file...
+            - mvn clean install
+    post_build:
+        commands:
+            - echo Build complete.commands
+artifacts:
+    files:
+        - target/primes-0.0.1-SNAPSHOT.jar
+    discard-paths: yes
